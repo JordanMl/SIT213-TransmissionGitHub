@@ -3,20 +3,12 @@ package destinations;
 import information.Information;
 import information.InformationNonConforme;
 
-public class DestinationFinale extends Destination<Boolean>{
-
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-	}
+public class DestinationFinale<T> extends Destination<T>{
 
 	@Override
-	public void recevoir(Information<Boolean> information) throws InformationNonConforme {
+	public void recevoir(Information<T> information) throws InformationNonConforme {
 		
-		for(Boolean info : information){
+		for(T info : information){
 			System.out.println(info);
 		}
 	}

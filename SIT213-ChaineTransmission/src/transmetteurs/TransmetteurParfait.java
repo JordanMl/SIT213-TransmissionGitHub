@@ -4,26 +4,21 @@ import destinations.DestinationInterface;
 import information.Information;
 import information.InformationNonConforme;
 
-public class TransmetteurParfait extends Transmetteur<Boolean,Boolean>{
+public class TransmetteurParfait<R,E> extends Transmetteur<R,E>{
 
-	/**
-	 * @param args
-	 */
-	
 
 	@Override
-	public void recevoir(Information<Boolean> information) throws InformationNonConforme {
+	public void recevoir(Information<R> information) throws InformationNonConforme {
 		informationRecue = information;
-        emettre();
-		
+		informationEmise = (Information<E>) informationRecue; //On se contente de copier l'info recue pour l'emettre
+        emettre();		
 	}
 
 	@Override
 	public void emettre() throws InformationNonConforme {
-		for (DestinationInterface<Boolean> destinationConnectee : destinationsConnectees) {
-            destinationConnectee.recevoir(informationRecue);
-         }
-         this.informationEmise = informationRecue;   
+		for (DestinationInterface<E> destinationConnectee : destinationsConnectees) {
+            destinationConnectee.recevoir(informationEmise);
+         }   
 	}
 
 }

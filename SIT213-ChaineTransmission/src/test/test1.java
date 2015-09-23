@@ -16,14 +16,14 @@ public class test1 {
 		
 		Boolean[] b = {true,false,true,false,true,false,true,false};
 		Information<Boolean> pinfos = new Information<>(b);
-		SourceFixe sf = new SourceFixe(pinfos);
+		SourceFixe<Boolean> sf = new SourceFixe<Boolean>(pinfos);
 		
 		SondeLogique sl1 = new SondeLogique("sl1",50);
 		SondeLogique sl2 = new SondeLogique("sl2",50);
 		
-		TransmetteurParfait tp = new TransmetteurParfait() ;
+		TransmetteurParfait<Boolean,Boolean> tp = new TransmetteurParfait<Boolean,Boolean>() ;
 		
-		DestinationFinale df = new DestinationFinale() ;
+		DestinationFinale<Boolean> df = new DestinationFinale<Boolean>() ;
 		
 		sf.connecter(sl1);
 		sf.connecter(tp);

@@ -1,13 +1,10 @@
 package sources;
 
-import information.Information;
-import information.InformationNonConforme;
-
-import java.util.LinkedList;
-
+import information.*;
 import destinations.DestinationInterface;
+import java.util.*;
 
-public class SourceFixe extends Source<Boolean>{
+public class SourceFixe <T> extends Source<T>{
 
 	/**
 	 * @param pdestinations 
@@ -15,7 +12,7 @@ public class SourceFixe extends Source<Boolean>{
 	 * @param args
 	 */
 	
-	public SourceFixe(Information<Boolean> pinfos){
+	public SourceFixe(Information<T> pinfos){
 	
 		informationGeneree = pinfos ;
 		informationEmise = null;
