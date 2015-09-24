@@ -1,5 +1,7 @@
 package test;
 
+import java.util.Random;
+
 import destinations.DestinationFinale;
 import information.Information;
 import information.InformationNonConforme;
@@ -14,9 +16,23 @@ public class test1 {
 	 */
 	public static void main(String[] args) {
 		
+		   String valeurs ="100001";
+		   Information<Boolean> infoEmettre = new Information<>() ;
+		   String[] tabString = valeurs.split("");
+		   
+		   for(String echantilon : tabString){
+			   if(echantilon.equals("1")){
+				   infoEmettre.add(true);
+			   }else{
+				   infoEmettre.add(false);
+			   }
+		   }
+		   System.out.println(infoEmettre);
+		
+	
 		Boolean[] b = {true,false,true,false,true,false,true,false};
 		Information<Boolean> pinfos = new Information<>(b);
-		SourceFixe<Boolean> sf = new SourceFixe<Boolean>(pinfos);
+		SourceFixe<Boolean> sf = new SourceFixe<Boolean>("");
 		
 		SondeLogique sl1 = new SondeLogique("sl1",50);
 		SondeLogique sl2 = new SondeLogique("sl2",50);

@@ -1,23 +1,21 @@
 package test ;
    import sources.*;
-   import destinations.*;
-   import transmetteurs.*;
-
-   import information.*;
-
-   import visualisations.*;
+import destinations.*;
+import transmetteurs.*;
+import information.*;
+import visualisations.*;
 
    import java.util.regex.*;
-   import java.util.*;
-   import java.lang.Math;
+import java.util.*;
+import java.lang.Math;
 
 	
    import java.io.FileInputStream;
-   import java.io.FileNotFoundException;
-   import java.io.BufferedWriter;
-   import java.io.FileWriter;
-   import java.io.IOException;
-   import java.io.PrintWriter;
+import java.io.FileNotFoundException;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 
 /** La classe Simulateur permet de construire et simuler une cha�ne de transmission compos�e d'une Source, d'un nombre variable de Transmetteur(s) et d'une Destination.  
@@ -119,6 +117,7 @@ package test ;
             	// traiter la valeur associee
                try { 
                   seed =new Integer(args[i]);
+                  
                }
                   catch (Exception e) {
                      throw new ArgumentsException("Valeur du parametre -seed  invalide :" + args[i]);
@@ -132,6 +131,7 @@ package test ;
                if (args[i].matches("[0,1]{7,}")) {
                   messageAleatoire = false;
                   nbBitsMess = args[i].length();
+                  
                } 
                else if (args[i].matches("[0-9]{1,6}")) {
                   messageAleatoire = true;
@@ -159,7 +159,26 @@ package test ;
    */ 
       public void execute() throws Exception {      
          
-         //  source.emettre(); 
+         if(!messageAleatoire){
+        	source = new SourceFixe(messageString);
+      
+        	SondeLogique sondeLogique1 = new SondeLogique("sondeDataEmis",50);
+        	SondeLogique sondeLogique2 = new SondeLogique("sondeDataRecus",50);
+        		
+        	transmetteurLogique = new TransmetteurParfait() ;
+        	destination = new DestinationFinale() ;
+        	
+        	
+        	source.connecter(transmetteurLogique); //Connexion de la source et du transmetteur
+        	if(affichage) source.connecter(sondeLogique1); // affichage des sondes si souhaité par l'utilisateur
+        	
+        	transmetteurLogique.connecter(destination); //Connexion du transmetteur et de la destination finale
+        	if(affichage) source.connecter(sondeLogique2); // affichage des sondes si souhaité par l'utilisateur
+      
+        	source.emettre(); // on emet le signal
+        	
+         }
+        		 
       	     	      
       }
    
@@ -171,9 +190,19 @@ package test ;
    */   	   
       public float  calculTauxErreurBinaire() {
       
-      	// A compl�ter
-      	
-         return  0.0f;
+      	int nbElementsEmis = source.getInformationEmise().nbElements() ;
+        int nbBitsFaux = 0 ;
+      	int i ;
+      	for(i=0;i<nbElementsEmis;i++){
+      		if(source.getInformationEmise().iemeElement(i) != destination.getInformationRecue().iemeElement(i)){
+      			nbBitsFaux++ ;
+      		}	
+      	}
+      		
+      	if(nbBitsFaux != 0)	
+         return  (float)nbElementsEmis/(float)nbBitsFaux;
+      	else
+      		return 0.0f ;
       }
    
    
@@ -210,5 +239,6 @@ package test ;
             }              	
       }
    	
-   }
+  
 
+}

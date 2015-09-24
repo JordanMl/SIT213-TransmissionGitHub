@@ -3,14 +3,21 @@ package destinations;
 import information.Information;
 import information.InformationNonConforme;
 
-public class DestinationFinale<T> extends Destination<T>{
+
+public class DestinationFinale extends Destination<Boolean>{
 
 	@Override
-	public void recevoir(Information<T> information) throws InformationNonConforme {
+	public void recevoir(Information<Boolean> information) throws InformationNonConforme {
 		
-		for(T info : information){
-			System.out.println(info);
-		}
+//		for(Boolean info : information.iterator()){
+//			System.out.println(info);
+//		}
+		this.informationRecue = information ;
 	}
+	
+	public Information<Boolean>  getInformationRecue() {
+        return this.informationRecue;
+     }
+
 
 }
