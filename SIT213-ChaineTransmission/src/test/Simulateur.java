@@ -17,7 +17,7 @@ package test ;
    import java.io.BufferedWriter;
    import java.io.FileWriter;
    import java.io.IOException;
-import java.io.PrintWriter;
+   import java.io.PrintWriter;
 
 
 /** La classe Simulateur permet de construire et simuler une cha�ne de transmission compos�e d'une Source, d'un nombre variable de Transmetteur(s) et d'une Destination.  
@@ -60,26 +60,14 @@ import java.io.PrintWriter;
    */   
       public  Simulateur(String [] args) throws ArgumentsException {
       
-      	// analyser et r�cup�rer les arguments      	
+      	// analyser et r�cup�rer les arguments
+      	
          analyseArguments(args);
-         
-         Boolean[] b = {true,false,true,false,true,false,true,false};
-         Information<Boolean> informationGeneree = new Information<>(b); //Creation de l'information a partir des valeurs booleenes
-        
-         source = new SourceFixe<Boolean>(informationGeneree);
-         transmetteurLogique = new TransmetteurParfait<Boolean,Boolean>();
-         destination = new DestinationFinale<Boolean>();
-         
-         source.connecter(transmetteurLogique); //Connection de la source au transmetteur parfait
-         transmetteurLogique.connecter(destination); //Connection du transmetteur parfait à la destination
-         
-         if (affichage == true){ //Affichage des sondes si affichage = 1
-        	 SondeLogique sl1 = new SondeLogique("sl1",50);
-        	 SondeLogique sl2 = new SondeLogique("sl2",50);        	 
-        	 source.connecter(sl1);
-        	 transmetteurLogique.connecter(sl2);
-         }
-                        		
+      
+      	      
+      	// A compl�ter
+      	
+      		
       }
    
    
@@ -171,7 +159,7 @@ import java.io.PrintWriter;
    */ 
       public void execute() throws Exception {      
          
-         source.emettre();
+         //  source.emettre(); 
       	     	      
       }
    
