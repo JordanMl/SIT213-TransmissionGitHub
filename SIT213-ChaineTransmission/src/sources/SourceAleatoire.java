@@ -8,7 +8,7 @@ public class SourceAleatoire extends Source<Boolean>{
 	
 	/**
 	 *
-	 * @param seed  germe utilisé pour generer une suite de bit aléatoire
+	 * @param seed  germe utilisée pour generer une suite de bit aléatoire
 	 * @param nb  taille de la donnée à emettre
 	 */
 	public SourceAleatoire(int seed,int nb){

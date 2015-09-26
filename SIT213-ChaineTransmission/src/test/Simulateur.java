@@ -58,13 +58,49 @@ import java.io.PrintWriter;
    */   
       public  Simulateur(String [] args) throws ArgumentsException {
       
-      	// analyser et r?cup?rer les arguments
-      	
+      	// analyser et r?cup?rer les arguments      	
          analyseArguments(args);
       
-      	      
-      	// A compl?ter
-      	
+        // Création de la chaine de transmission
+         if(!messageAleatoire){
+         	source = new SourceFixe(messageString);
+       
+         	SondeLogique sondeLogique1 = new SondeLogique("sondeDataEmis",50);
+         	SondeLogique sondeLogique2 = new SondeLogique("sondeDataRecus",50);
+         		
+         	transmetteurLogique = new TransmetteurParfait() ;
+         	destination = new DestinationFinale() ;
+         	
+         	
+         	source.connecter(transmetteurLogique); //Connexion de la source et du transmetteur
+         	if(affichage) source.connecter(sondeLogique1); // affichage des sondes si souhaité par l'utilisateur
+         	
+         	transmetteurLogique.connecter(destination); //Connexion du transmetteur et de la destination finale
+         	if(affichage) source.connecter(sondeLogique2); // affichage des sondes si souhaité par l'utilisateur
+       
+         	
+         	
+          }else {
+         	
+         	if(aleatoireAvecGerme) {
+         		source = new SourceAleatoire(seed,nbBitsMess);
+         	}else{
+         		source = new SourceAleatoire(nbBitsMess);
+         	}
+          	SondeLogique sondeLogique1 = new SondeLogique("sondeDataEmis",50);
+          	SondeLogique sondeLogique2 = new SondeLogique("sondeDataRecus",50);
+          		
+          	transmetteurLogique = new TransmetteurParfait() ;
+          	destination = new DestinationFinale() ;
+          	
+          	
+          	source.connecter(transmetteurLogique); //Connexion de la source et du transmetteur
+          	if(affichage) source.connecter(sondeLogique1); // affichage des sondes si souhaité par l'utilisateur
+          	
+          	transmetteurLogique.connecter(destination); //Connexion du transmetteur et de la destination finale
+          	if(affichage) source.connecter(sondeLogique2); // affichage des sondes si souhaité par l'utilisateur
+        
+          }          	
       		
       }
    
@@ -159,48 +195,7 @@ import java.io.PrintWriter;
    */ 
       public void execute() throws Exception {      
          
-         if(!messageAleatoire){
-        	source = new SourceFixe(messageString);
-      
-        	SondeLogique sondeLogique1 = new SondeLogique("sondeDataEmis",50);
-        	SondeLogique sondeLogique2 = new SondeLogique("sondeDataRecus",50);
-        		
-        	transmetteurLogique = new TransmetteurParfait() ;
-        	destination = new DestinationFinale() ;
-        	
-        	
-        	source.connecter(transmetteurLogique); //Connexion de la source et du transmetteur
-        	if(affichage) source.connecter(sondeLogique1); // affichage des sondes si souhaité par l'utilisateur
-        	
-        	transmetteurLogique.connecter(destination); //Connexion du transmetteur et de la destination finale
-        	if(affichage) source.connecter(sondeLogique2); // affichage des sondes si souhaité par l'utilisateur
-      
-        	source.emettre(); // on emet le signal
-        	
-         }else {
-        	
-        	if(aleatoireAvecGerme) {
-        		source = new SourceAleatoire(seed,nbBitsMess);
-        	}else{
-        		source = new SourceAleatoire(nbBitsMess);
-        	}
-         	SondeLogique sondeLogique1 = new SondeLogique("sondeDataEmis",50);
-         	SondeLogique sondeLogique2 = new SondeLogique("sondeDataRecus",50);
-         		
-         	transmetteurLogique = new TransmetteurParfait() ;
-         	destination = new DestinationFinale() ;
-         	
-         	
-         	source.connecter(transmetteurLogique); //Connexion de la source et du transmetteur
-         	if(affichage) source.connecter(sondeLogique1); // affichage des sondes si souhaité par l'utilisateur
-         	
-         	transmetteurLogique.connecter(destination); //Connexion du transmetteur et de la destination finale
-         	if(affichage) source.connecter(sondeLogique2); // affichage des sondes si souhaité par l'utilisateur
-       
-         	source.emettre(); // on emet le signal
-         }
-        		 
-      	     	      
+    	  source.emettre(); // on emet le signal   	      	     	      
       }
    
    	   	
