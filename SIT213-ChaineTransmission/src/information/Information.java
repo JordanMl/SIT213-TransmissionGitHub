@@ -20,7 +20,7 @@ package information;
       public Information() {
          this.content = new LinkedList <T> (); 
       }
-   
+     
    	
    
    /**

@@ -2,14 +2,14 @@ package destinations;
 
 	import information.*;
 
-//MOMO COMMIT OKAYYYYY ???
+
 /** 
  * Classe Abstraite d'un composant destination d'informations dont les éléments sont de type T 
  * @author prou
  */
     public  abstract class Destination <T> implements DestinationInterface <T> {
    
-   private String momoVariable ;
+   
    
    /** 
    * l'information reçue par la destination 
