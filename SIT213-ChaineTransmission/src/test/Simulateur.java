@@ -57,15 +57,45 @@ import java.io.PrintWriter;
    *
    */   
       public  Simulateur(String [] args) throws ArgumentsException {
-      
-      	// analyser et r�cup�rer les arguments
-      	
-         analyseArguments(args);
-      
-      	      
-      	// A compl�ter
-      	
+    	  
+    	
+    	String help0="\tNAME\n\t\tsimulateur – Simulation de la transmission d'un message numérique\n"; 
+    	String help1="\n\tSYNOPSIS\n\t\tjava Simulateur [...] \n"; 
+    			
+    	String help2 = "\n\tDESCRIPTION\n\t\tIl s'agit de simuler la transmission d'un message numérique (train de bits 0 ou 1)\n"
+    			+ "\t\tdans un système de transmissionentre un point d’entrée jusqu'à un point de sortie, via un canal de transmission (ou de communication).\n"
+    			+ "\t\tLes nombreux paramètres de la simulation permettent de choisir les caractéristiques du message à transmettre, du\n"
+    			+ "\t\tcanal de propagation et du système de transmission.\n"
+    			+ "\t\tLe résultat de la simulation est la valeur du taux d’erreur binaire de la transmission totale (TEB).\n"
+    			+ "\t\tLes graphiques reproduisant le signal à différents étages du système de transmission (si option –s) sont assimilables\n"
+    			+ "\t\tà des résultats.\n"  ;
+    	String help3 ="\n\tOPTIONS :\n"
+    			+ "\t\tPar défaut le simulateur doit utiliser une chaîne de transmission logique, avec un message aléatoire de longueur 100, sans\n"
+    			+ "\t\tutilisation de sondes et sans utilisation de transducteur.\n\n"
+    			+ "\t\t-mess m\n"
+    			+ "\t\t\tprécise le message ou la longueur du message à émettre :\n"
+    			+ "\t\t\tSi m est une suite de 0 et de 1 de longueur au moins égale à 7, m est le message à émettre.\n"
+    			+ "\t\t\tSi m comporte au plus 6 chiffres décimaux et correspond à la représentation en base 10 d'un entier,\n"
+    			+ "\t\t\tcet entier est la longueur du message que le simulateur doit générer et transmettre.\n"
+    			+ "\t\t\tPar défaut le simulateur doit générer et transmettre un message de longueur 100.\n\n"
+    			+ "\t\t-s\n"
+    			+ "\t\t\tindique l’utilisation des sondes.\n"
+    			+ "\t\t\tPar défaut le simulateur n’utilise pas de sondes\n"
+    			+ "\t\t-seed v\n\n"
+    			+ "\t\t\tprécise l’utilisation d’une semence pour l’initialisation des générateurs aléatoires du simulateur.\n"
+    			+ "\t\t\tv doit être une valeur entière. L’utilisation d’une semence permet de rejouer à l’identique une simulation\n"
+    			+ "\t\t\t(à la fois pour le message émis et le bruitage s’il est activé).\n"
+    			+ "\t\t\tPar défaut le simulateur n’utilise pas de semence pour initialiser ses générateurs aléatoires\n";
+
+    	
+      	if(args.length > 1){
+      		analyseArguments(args);
+      	}else{
+      		System.out.println(help0+help1+help2+help3);
+      		throw new ArgumentsException("Vous devez avoir au moins deux arguments");
       		
+      	}
+      	
       }
    
    
@@ -221,8 +251,8 @@ import java.io.PrintWriter;
       		}	
       	}
       		
-      	if(nbBitsFaux != 0)	
-         return  (float)nbElementsEmis/(float)nbBitsFaux;
+      	if(nbElementsEmis != 0)	
+         return (float)nbBitsFaux/ (float)nbElementsEmis;
       	else
       		return 0.0f ;
       }

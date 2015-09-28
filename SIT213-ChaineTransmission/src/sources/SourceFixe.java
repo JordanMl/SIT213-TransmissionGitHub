@@ -8,9 +8,8 @@ import java.util.*;
 public class SourceFixe extends Source<Boolean>{
 
 	/**
-	 * @param pdestinations 
-	 * @param pinfos 
-	 * @param args
+	 * Classe SourceFixe, permettant d'emettre une suite de bits non aléatoire
+	 * @param pinfos Données sous fprme de chaîne de caractere contenant des 0 et 1, representant les données à emettre
 	 */
 	
 	public SourceFixe(String pinfos){
